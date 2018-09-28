@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 14:32:49 by sechang           #+#    #+#             */
-/*   Updated: 2018/09/26 17:47:16 by sechang          ###   ########.fr       */
+/*   Updated: 2018/09/27 21:08:57 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	placepiece(t_data *data, int xp, int yp)
 	int	y;
 	char hck;
 
-	hck = 1;
+	hck = 100;
 	i = 0;
 	while (i < data->bp_i)
 	{
@@ -33,13 +33,13 @@ int	placepiece(t_data *data, int xp, int yp)
 			x = 0;
 			while (x < data->p_x)
 			{
-				if (data->hmap[data->b_y[data->bp_i + y]][data->
-						b_x[data->bp_i + x]] > hck)
+				if (data->hmap[data->bp_y[i] + y][data->
+						bp_x[i] + x] < hck)
 				{
-					xp = data->b_x[data->bp_i];
-					yp = data->b_y[data->bp_i];
-					hck = data->hmap[data->b_y[data->bp_i + y]][data->
-						b_x[data->bp_i+ x]];
+					xp = data->bp_x[i];
+					yp = data->bp_y[i];
+					hck = data->hmap[data->bp_y[i] + y][data->
+						bp_x[i] + x];
 				}
 				x++;
 			}
@@ -47,7 +47,7 @@ int	placepiece(t_data *data, int xp, int yp)
 		}
 		i++;
 	}
-	printf("---------------------------------- %d, %d\n", yp, xp);
+	ft_printf("%d %d\n", yp, xp);
 	return (0);
 }
 
@@ -70,13 +70,13 @@ int	alldircheck(t_data *data, int y, int x, int heatnum)
 //			printf("y=%c\n", data->hmap[y + col][x + row]);
 			if (data->hmap[y + col][x + row] == '.')
 			{
-				printf("inside%d\n", heatnum);
+//				printf("inside%d\n", heatnum);
 				data->hmap[y + col][x + row] = heatnum;
 				data->bh_y[k][data->bh_index[k]] = y + col;
 				data->bh_x[k][data->bh_index[k]] = x + row;
 				data->bh_index[k]++;
 				success = 1;
-				printf("y=%c\n", data->hmap[y + col][x + row]);
+//				printf("y=%c\n", data->hmap[y + col][x + row]);
 			}
 			row++;
 		}
@@ -108,11 +108,11 @@ int	heatmap_it(t_data *data)
 			i++;
 		}
 		data->k = (data->k == 1) ? 0 : 1;
-		printf("data->k[%d]\n", data->k);
+//		printf("data->k[%d]\n", data->k);
 		heatnum++;
 //		printf ("complete=%d\n", complete);
 	}
-	test(data);
+//	test(data);
 	return (0);
 }
 
@@ -126,7 +126,7 @@ int	piece_map_check(t_data *data, int i, int y, int x)
 
 	counter = 0;
 	yi = 0;
-	printf("p m check\n");
+//	printf("p m check\n");
 	while (yi < data->p_y) 
 	{
 		pby = data->b_y[i] - (data->p_y - 1) + yi + y;
@@ -134,13 +134,19 @@ int	piece_map_check(t_data *data, int i, int y, int x)
 		while (xi < data->p_x)
 		{
 			pbx = data->b_x[i] - (data->p_x - 1) + xi + x;
-			printf("dbxi=%ddbyi=%d\n",data->b_x[i], data->b_y[i]);
-			printf("yi=%d, xi=%d\n", yi, xi);
-				printf("pby=%d pbx= %d, i=%d,  x=%d,xi=%d,y=%d,yi=%d\n", pby, pbx,i,x,xi,y,yi);
-			if (data->piece[yi][xi] == '*' && (data->map[pby][pbx] == data->ox
-						|| data->map[pby][pbx] == data->bigox))
+//			printf("dbxi=%ddbyi=%d\n",data->b_x[i], data->b_y[i]);
+//			printf("yi=%d, xi=%d\n", yi, xi);
+//				printf("pby=%d pbx= %d, i=%d,  x=%d,xi=%d,y=%d,yi=%d\n", pby, pbx,i,x,xi,y,yi);
+			if (data->piece[yi][xi] == '*' && (data->map[pby][pbx] == data->ox_b
+				|| data->map[pby][pbx] == data->bigox_b) || pby >= data->m_y)
 			{
-				printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~inside\n");
+//				printf("X overlap\n");
+				counter = 100;
+			}
+			else if (data->piece[yi][xi] == '*' && (data->map[pby][pbx] == data->ox
+				|| data->map[pby][pbx] == data->bigox))
+			{
+//				printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~inside\n");
 //				printf("pby=%d pbx= %d, i=%d,  x=%d,xi=%d,y=%d,yi=%d\n", pby, pbx,i,x,xi,y,yi);
 				counter++;
 			}
@@ -171,11 +177,11 @@ int	piece_to_bound(t_data *data)
 					&& piece_map_check(data, i, y, x) == 1)
 				{
 
-		printf("i=%d\n", i);
-					printf("data_py[%d], data_px[%d] == '*' \n", (data->p_y - 1) - y, (data->p_x - 1) - x);
+//		printf("i=%d\n", i);
+//					printf("data_py[%d], data_px[%d] == '*' \n", (data->p_y - 1) - y, (data->p_x - 1) - x);
 //					printf("we in\n");
-					printf("y: %d\n", (data->b_y[i] - ((data->p_y - 1) - y)));
-					printf("x: %d\n", (data->b_x[i] - ((data->p_x - 1) - x)));
+//					printf("y: %d\n", (data->b_y[i] - ((data->p_y - 1) - y)));
+//					printf("x: %d\n", (data->b_x[i] - ((data->p_x - 1) - x)));
 
 					data->bp_y[data->bp_i] = (data->b_y[i] - ((data->p_y - 1) - y));
 					data->bp_x[data->bp_i] = (data->b_x[i] - ((data->p_x - 1) - x));
@@ -187,7 +193,7 @@ int	piece_to_bound(t_data *data)
 		}
 		i++;
 	}
-	printf("bp_i= %d\n", data->bp_i);
+//	printf("bp_i= %d\n", data->bp_i);
 	return (0);
 }
 
@@ -277,7 +283,7 @@ int	analyze_boundary(t_data *data)
 				{
 					data->bh_y[0][data->bh_index[0]] = y;
 					data->bh_x[0][data->bh_index[0]] = x;
-					printf("BH_index[%d]=%d, %d\n", data->bh_index[0], data->bh_y[0][data->bh_index[0]], data->bh_x[0][data->bh_index[0]]);
+//					printf("BH_index[%d]=%d, %d\n", data->bh_index[0], data->bh_y[0][data->bh_index[0]], data->bh_x[0][data->bh_index[0]]);
 					data->bh_index[0]++;
 				}
 			}
@@ -449,13 +455,13 @@ int		test(t_data *data)
 	return (0);
 }
 
-int	scan_map_piece(t_data *data)
+int	scan_map_piece(t_data *data, int k, char *s)
 {
 	int	i;
-	int	k;
-	char	*s;
+//	int	k;
+//	char	*s;
 
-	k = get_next_line(0, &s);
+//	k = get_next_line(0, &s);
 	if (k <= 0)
 		return (-1);
 //		break;
@@ -473,7 +479,7 @@ int	scan_map_piece(t_data *data)
 //		while (s[i] != ' ' && s[i])
 //			i++;
 		data->m_x = ft_atoi(s + (i + (data->m_y <= 9 ? 3 : 4)));
-		printf("my=%dmx=%d\n", data->m_y, data->m_x);
+//		printf("my=%dmx=%d\n", data->m_y, data->m_x);
 	}
 	else if ('0' <= s[0] && s[0] <= '9')
 	{
@@ -487,7 +493,7 @@ int	scan_map_piece(t_data *data)
 			i++;
 		data->p_y = ft_atoi(s + i);
 		data->p_x = ft_atoi(s + (i + (data->p_y <= 9 ? 3 : 4)));
-		printf("py=%dpx=%d\n", data->p_y, data->p_x);
+//		printf("py=%dpx=%d\n", data->p_y, data->p_x);
 //		printf("%d\n", data->p_y);
 		i = -1;
 		while (++i < data->p_y)
@@ -501,7 +507,7 @@ int	scan_map_piece(t_data *data)
 		piece_to_bound(data);
 		heatmap_it(data);
 		placepiece(data, 0, 0);
-		printf("pax=%dpay=%d", data->pa_x, data->pa_y);
+//		printf("pax=%dpay=%d", data->pa_x, data->pa_y);
 		return (-1);
 //		break ;
 	}
@@ -510,11 +516,59 @@ int	scan_map_piece(t_data *data)
 	return (0);
 }
 
+
+
+
+
+void	initzero_a(t_data *data)
+{
+	ft_memset((void *)data->map, 0, 10000);
+
+	ft_memset((void *)data->piece, 0, 10000);
+/*
+	int				data->m_x;
+	int				data->m_y;
+*/
+	data->p_x = 0;
+	data->p_y = 0;
+	data->pa_x = 0;
+	data->pa_y = 0;
+/*
+	char			data->player;
+	char			data->ox;
+	char			data->bigox;
+	char			data->ox_b;
+	char			data->bigox_b;
+*/
+	ft_memset((void *)data->b_x, 0, 10000);
+	ft_memset((void *)data->b_y, 0, 10000);
+	data->b_index = 0;
+	ft_memset((void *)data->bh_x, 0, 10000);
+	ft_memset((void *)data->bh_y, 0, 10000);
+
+	ft_memset((void *)data->bh_index, 0, sizeof(data->bh_index));
+
+	ft_memset((void *)data->bp_x, 0, 10000);
+	ft_memset((void *)data->bp_y, 0, 10000);
+	ft_memset((void *)data->hmap, 0, 10000);
+	data->bp_i = 0;
+	data->k = 0;
+/*
+	char			data->piecex;
+	char			data->piecey;
+*/
+
+}
+
+
+
 int	main(void)
 {
 	t_data	*data;
+	int k;
+	char *line;
 
-
+//	write (1, "hello\n", 6);
 	if (!(data = malloc(sizeof(t_data) * 1)))
 		return (0);
 	data->b_index = 0;
@@ -527,14 +581,25 @@ int	main(void)
 	data->bigox_b = 'X';
 //	ft_bzero(data.map);
 //	ft_bzero(data.piece);
-	while (1)
+
+	while ((k = get_next_line(0, &line)))
 	{
-		if (scan_map_piece(data) == -1)
+//		scan_map_piece(data, k, line);
+
+		if (scan_map_piece(data, k, line) == -1)
 		{
-			test(data);
-			break;
+			initzero_a(data);
+//			test(data);
+//			break;
+//			write (1, &data->pa_y, 1);
+//			write (1, " ", 1);
+//			write (1, &data->pa_x, 1);
+//			write (1, "\n", 1);
+			
+//			printf("%d, %d", data->pa_y, data->pa_x);
+//			break;
 		}
 	}
-	printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+//	printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 	return (0);
 }

@@ -6,13 +6,15 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 20:47:16 by sechang           #+#    #+#             */
-/*   Updated: 2018/08/12 15:03:51 by sechang          ###   ########.fr       */
+/*   Updated: 2018/09/20 17:50:45 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "get_next_line.h"
+# include "ft_printf.h"
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
@@ -88,5 +90,6 @@ int					ft_isupper(int c);
 int					ft_islower(int c);
 int					ft_iswhitespace(int c);
 char				**ft_getwords(char const *s, char c);
+
 
 #endif

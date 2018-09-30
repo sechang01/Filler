@@ -6,7 +6,7 @@
 #    By: sechang <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/16 09:56:58 by sechang           #+#    #+#              #
-#    Updated: 2018/07/21 11:43:17 by sechang          ###   ########.fr        #
+#    Updated: 2018/09/27 12:35:51 by sechang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libft.a
 FLAGS = -Wall -Wextra -Werror
 CC = gcc
 OPTION = -c -I
-SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c \
+SRC0 = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c \
 	ft_memcmp.c ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
 	ft_strncat.c ft_strlcat.c ft_strchr.c ft_strrchr.c ft_strstr.c \
 	ft_strnstr.c ft_strcmp.c ft_strncmp.c ft_atoi.c ft_isalpha.c ft_isdigit.c \
@@ -27,25 +27,25 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c \
 	ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c \
 	ft_lstmap.c \
 	ft_get_intlen.c ft_isupper.c ft_islower.c ft_iswhitespace.c ft_getwords.c\
+	Get_next_line/get_next_line.c \
+	Printf/ft_printf.c \
+	Printf/ft_fprintf.c \
+	Printf/lettermatch.c \
+	Printf/fmtr.c \
+	Printf/charific.c \
+	Printf/numeric.c \
+	Printf/printf_u.c \
+	Printf/printf_o.c \
+	Printf/printf_x.c \
+	Printf/itoabase.c \
 
-OBJ = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o ft_memchr.o \
-	ft_memcmp.o ft_strlen.o ft_strdup.o ft_strcpy.o ft_strncpy.o ft_strcat.o \
-	ft_strncat.o ft_strlcat.o ft_strchr.o ft_strrchr.o ft_strstr.o \
-	ft_strnstr.o ft_strcmp.o ft_strncmp.o ft_atoi.o ft_isalpha.o ft_isdigit.o \
-	ft_isalnum.o ft_isascii.o ft_isprint.o ft_toupper.o ft_tolower.o \
-	ft_memalloc.o ft_memdel.o ft_strnew.o ft_strdel.o ft_strclr.o \
-	ft_striter.o ft_striteri.o ft_strmap.o ft_strmapi.o ft_strequ.o \
-	ft_strnequ.o ft_strsub.o ft_strjoin.o ft_strtrim.o ft_strsplit.o \
-	ft_itoa.o ft_putchar.o ft_putstr.o ft_putendl.o ft_putnbr.o \
-	ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o \
-	ft_lstnew.o ft_lstdelone.o ft_lstdel.o ft_lstadd.o ft_lstiter.o \
-	ft_lstmap.o \
-	ft_get_intlen.o ft_isupper.o ft_islower.o ft_iswhitespace.o ft_getwords.o\
-
+SRCDIR = src/
+SRC = $(addprefix $(SRCDIR), $(SRC0))
+OBJ = *.o
 all: $(NAME)
 
-$(NAME): 
-	$(CC) -c $(FLAGS) $(SRC)
+$(NAME):
+	$(CC) -c $(FLAGS) $(SRC) -I inc/
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 

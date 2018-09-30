@@ -1,5 +1,4 @@
-seed = 2048
-O: error on input
-players/abanlin.filler won
+seed = 3811
+./sechang.filler -v won
 Score:
-8AGAINST8
+1069AGAINST924

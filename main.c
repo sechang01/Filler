@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 14:32:49 by sechang           #+#    #+#             */
-/*   Updated: 2018/09/29 20:37:23 by sechang          ###   ########.fr       */
+/*   Updated: 2018/09/29 21:22:38 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	visualise(int option)
 	{
 		newterm(NULL, stderr, stdin);
 		start_color();
+		init_pair(1, COLOR_WHITE, COLOR_BLACK);
+		init_pair(2, COLOR_BLACK, COLOR_GREEN);
+		init_pair(3, COLOR_BLACK, COLOR_YELLOW);
 	}
 	else if (option == 2)
 	{
 		clear();
-		init_pair(1, COLOR_WHITE, COLOR_BLACK);
-		init_pair(2, COLOR_BLACK, COLOR_GREEN);
-		init_pair(3, COLOR_BLACK, COLOR_YELLOW);
 	}
 	else if (option == 3)
 	{
@@ -41,11 +41,12 @@ void	visvis(t_data *data)
 	int		x;
 	int		y;
 
-	y = -1;
+	y = 0;
 	visualise(2);
-	while (++y < data->m_y && (x = -1))
+	while (y < data->m_y)
 	{
-		while (++x < data->m_x)
+		x = 0;
+		while (x < data->m_x)
 		{
 			if (data->map[y][x] == '.')
 				attron(COLOR_PAIR(1));
@@ -54,8 +55,10 @@ void	visvis(t_data *data)
 			else if (data->map[y][x] == 'O')
 				attron(COLOR_PAIR(3));
 			printw("%2c", data->map[y][x]);
+			x++;
 		}
 		printw("\n");
+		y++;
 	}
 	refresh();
 	usleep(data->slp);
@@ -63,6 +66,8 @@ void	visvis(t_data *data)
 
 int		filler_initall(t_data *data)
 {
+	data->m_y = 0;
+	data->m_x = 0;
 	data->b_index = 0;
 	data->bp_i = 0;
 	data->bh_index[0] = 0;
@@ -106,7 +111,7 @@ int	main(int argc, char **argv)
 		return (0);
 	vis = filler_initall(data);
 	if (argc >= 2)
-		if (!(ft_strcmp(argv[1], "-v")) && (vis = 1))
+		if (!(ft_strcmp(argv[1], "-v")) && ((vis = 1)))
 		   visualise(1);	
 	while ((k = get_next_line(0, &line)))
 	{

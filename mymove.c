@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 17:40:46 by sechang           #+#    #+#             */
-/*   Updated: 2018/09/29 20:26:19 by sechang          ###   ########.fr       */
+/*   Updated: 2018/09/30 18:31:36 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,12 @@ int		piece_map_check(t_data *data, int i, int y, int x)
 		while (++xi < data->p_x)
 		{
 			pbx = data->b_x[i] - (data->p_x - 1) + xi + x;
-			if (data->piece[yi][xi] == '*' && ((data->map[pby][pbx] == data->ox_b ||
-				data->map[pby][pbx] == data->bigox_b) || pby >= data->m_y ||
-					pbx >= data->m_x || pby < 0 || pbx < 0))
+			if (data->piece[yi][xi] == '*' && ((data->map[pby][pbx] == data->
+				ox_b || data->map[pby][pbx] == data->bigox_b) || pby >= data->
+					m_y || pbx >= data->m_x || pby < 0 || pbx < 0))
 				counter = 100;
-			else if (data->piece[yi][xi] == '*' && (data->map[pby][pbx] == data->ox
-				|| data->map[pby][pbx] == data->bigox))
+			else if (data->piece[yi][xi] == '*' && (data->map[pby][pbx] ==
+				data->ox || data->map[pby][pbx] == data->bigox))
 				counter++;
 		}
 	}

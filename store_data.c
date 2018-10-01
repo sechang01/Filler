@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 13:11:26 by sechang           #+#    #+#             */
-/*   Updated: 2018/09/29 21:20:38 by sechang          ###   ########.fr       */
+/*   Updated: 2018/09/30 18:24:55 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	store_map(char *line, t_data *data)
 	row = ft_atoi(line);
 	k = 0;
 	i = 4;
-	while (line[i] != '\n' && (line[i] == '.' || line[i] == 'o' || line[i] ==
-		'O'	|| line[i] == 'x' || line[i] == 'X'))
+	while (line[i] != '\n' && (line[i] == '.' || line[i] == 'o' ||
+		line[i] == 'O' || line[i] == 'x' || line[i] == 'X'))
 	{
 		data->map[row][k++] = line[i];
 		i++;

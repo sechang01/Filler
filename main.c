@@ -6,7 +6,7 @@
 /*   By: sechang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 14:32:49 by sechang           #+#    #+#             */
-/*   Updated: 2018/09/29 21:22:38 by sechang          ###   ########.fr       */
+/*   Updated: 2018/09/30 18:28:18 by sechang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	visualise(int option)
 		endwin();
 	}
 	else
-		return;
+		return ;
 }
 
 void	visvis(t_data *data)
@@ -100,11 +100,11 @@ void	filler_initzero(t_data *data)
 		data->slp = 888;
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_data	*data;
-	int		 k;
-	char 	*line;
+	int		k;
+	char	*line;
 	int		vis;
 
 	if (!(data = malloc(sizeof(t_data) * 1)))
@@ -112,9 +112,8 @@ int	main(int argc, char **argv)
 	vis = filler_initall(data);
 	if (argc >= 2)
 		if (!(ft_strcmp(argv[1], "-v")) && ((vis = 1)))
-		   visualise(1);	
+			visualise(1);
 	while ((k = get_next_line(0, &line)))
-	{
 		if (scan_map_piece(data, k, line, 0) == -1)
 		{
 			analyze_boundary(data, -1, -1);
@@ -125,8 +124,6 @@ int	main(int argc, char **argv)
 				visvis(data);
 			filler_initzero(data);
 		}
-	}
 	(vis == 1) ? visualise(3) : visualise(0);
 	return (0);
 }
-

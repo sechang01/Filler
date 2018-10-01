@@ -1,4 +1,5 @@
-seed = 3352
+seed = 8841
+O: error on input
 ./sechang.filler -v won
 Score:
-1087AGAINST902
+59AGAINST32

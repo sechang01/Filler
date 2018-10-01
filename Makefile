@@ -6,7 +6,7 @@
 #    By: sechang <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/16 09:56:58 by sechang           #+#    #+#              #
-#    Updated: 2018/09/29 21:23:12 by sechang          ###   ########.fr        #
+#    Updated: 2018/09/29 22:14:10 by sechang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,15 +20,23 @@ OBJ = $(SRC:.c=.o)
 
 vis: 
 	$(CC) $(FLAGS) -o $(NAME) $(SRC) $(LIB) -lncurses
-run:
-	./filler_vm -q -f maps/map02 -p1 "./sechang.filler -v" -p2 players/carli.filler
+ventev:
+	./filler_vm -f maps/map02 -p1 "./sechang.filler -v" -p2 players/carli.filler -q
+vente:
+	./filler_vm -f maps/map02 -p1 ./sechang.filler -p2 players/carli.filler
+grandev:
+	./filler_vm -f maps/map01 -p1 "./sechang.filler -v" -p2 players/carli.filler -q
+grande:
+	./filler_vm -f maps/map01 -p1 ./sechang.filler -p2 players/carli.filler
+tallv:
+	./filler_vm -f maps/map00 -p1 "./sechang.filler -v" -p2 players/carli.filler -q
+tall:
+	./filler_vm -f maps/map00 -p1 ./sechang.filler -p2 players/carli.filler
 all: $(NAME)
 
 $(NAME):
 	make -C Libft/
-	$(CC) -c $(FLAGS) $(SRC) 
-	ar rc $(NAME) $(OBJ) 
-	ranlib $(NAME)
+	$(CC) $(FLAGS) -o $(NAME) $(SRC) $(LIB) -lncurses
 
 clean:
 	make -C Libft/	clean
